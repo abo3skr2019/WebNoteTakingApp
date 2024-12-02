@@ -85,9 +85,9 @@ Button Styles
     .home
     {
         background: 
-        url(../image/human-1.svg) left bottom no-repeat,
-        url(../image/human-2.svg) right bottom no-repeat,
-        url(../image/noise-bg.png) left top repeat,
+        url(../image/human-1.svg) left  no-repeat,
+        url(../image/human-2.svg) right  no-repeat,
+        url(../image/noise-bg.png) left repeat,
         var(--background-color);
     }
 }
@@ -106,3 +106,8 @@ Button Styles
     bottom: -30px;
 
 }
+
+.logo {
+    width: 100px;
+    height: auto;
+  }

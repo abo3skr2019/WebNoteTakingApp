@@ -26,3 +26,27 @@ exports.about = async (req, res) => {
     };
     res.render("about", locals);
 }
+
+/*
+Get /faq
+FAQ page
+*/
+exports.faq = async (req, res) => {
+    const locals = {
+        title: "FAQ",
+        description: "Welcome to the FAQ page",
+    };
+    res.render("faq", locals);
+}
+
+/*
+Get /features
+Features page
+*/
+exports.features = async (req, res) => {
+    const locals = {
+        title: "Features",
+        description: "Discover the features of our application",
+    };
+    res.render("features", locals);
+}
