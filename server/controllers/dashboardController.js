@@ -98,7 +98,7 @@ exports.dashboardUpdateNote = async (req, res) => {
     try {
         await Notes.findOneAndUpdate(
             { _id: req.params.id }, 
-            {title: req.body.title, body: req.body.body}).where({ user: req.user._id });
+            {title: req.body.title, body: req.body.body, updatedAt:Date.now()}).where({ user: req.user._id });
         res.redirect("/dashboard");   
     } catch (error) {
         console.log(error);
