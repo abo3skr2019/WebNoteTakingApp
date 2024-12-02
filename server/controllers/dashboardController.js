@@ -1,5 +1,6 @@
 const Notes = require("../models/Notes");
 const mongoose = require("mongoose");
+const { search } = require("../routes");
 
 
 
@@ -89,17 +90,99 @@ exports.dashboardViewNote = async (req, res) => {
 }
 
 /*
-POST /dashboard/item:id
+PUT /dashboard/item:id
 Dashboard Update Note
 */
 
 exports.dashboardUpdateNote = async (req, res) => {
     try {
-        const note = await Notes.findOne({ _id: req.params.id });
-        note.title = req.body.title;
-        note.body = req.body.body;
-        note.save();
+        await Notes.findOneAndUpdate(
+            { _id: req.params.id }, 
+            {title: req.body.title, body: req.body.body}).where({ user: req.user._id });
+        res.redirect("/dashboard");   
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+/*
+DELETE /dashboard/item-delete:id
+Dashboard Delete Note
+*/
+
+
+exports.dashboardDeleteNote = async (req, res) => {
+    try {
+        await Notes.deleteOne({ _id: req.params.id }).where({ user: req.user._id });
         res.redirect("/dashboard");
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+/*
+GET /dashboard/add
+Dashboard Add Note
+*/
+
+exports.dashboardAddNote = async(req, res) => {
+    res.render("dashboard/add-note", {
+        layout : "../views/layouts/dashboard"
+    });
+}
+
+/*
+POST /dashboard/add
+Dashboard Add Note Submit
+*/
+exports.dashboardAddNoteSubmit = async (req, res) => {
+    try {
+        await Notes.create({
+            title: req.body.title,
+            body: req.body.body,
+            user: req.user._id
+        });
+        res.redirect("/dashboard");
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+/*
+GET /dashboard/search
+Dashboard Search
+*/
+
+exports.dashboardSearch = async (req, res) => {
+    try {
+        res.render("dashboard/search", {
+            searchResults: '',
+            layout : "../views/layouts/dashboard"
+        });
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
+
+/*
+POST /dashboard/search
+Dashboard Search Submit
+*/
+exports.dashboardSearchSubmit = async (req, res) => {
+    try {
+        let searchTerm = req.body.searchTerm;
+        const sanitizedSearchTerm = searchTerm.replace(/[^a-zA-Z0-9\s.,-]/g, '');
+        const searchResults = await Notes.find({
+            $or: [
+                {title: { $regex: new RegExp(sanitizedSearchTerm,'i')}},
+                {body: { $regex: new RegExp(sanitizedSearchTerm,'i')}},
+            ]
+        }).where({ user: req.user._id });
+        res.render("dashboard/search", {
+            searchResults,
+            layout : "../views/layouts/dashboard"
+        });
     } catch (error) {
         console.log(error);
     }
