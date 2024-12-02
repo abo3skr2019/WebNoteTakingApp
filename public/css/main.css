@@ -1,8 +1,7 @@
-:root
-{
-    --background-color: #ffc700;
-    --bs-primary-rgb: #11296c;
-}
+:root {
+    --background-color: #FFC700;
+    --bs-primary-rgb: #12296c;
+  }
 
 body
 {
@@ -80,6 +79,18 @@ Button Styles
 --bs-pagination-active-border-color: var(--bs-primary-rgb);
 }
 
+/* Home */
+@media (min-width: 1200px)
+{
+    .home
+    {
+        background: 
+        url(../image/human-1.svg) left bottom no-repeat,
+        url(../image/human-2.svg) right bottom no-repeat,
+        url(../image/noise-bg.png) left top repeat,
+        var(--background-color);
+    }
+}
 .home-title::before
 {
     content: url(../image/stars.svg);
