@@ -1,13 +1,13 @@
 :root {
-    --background-color: #FFC700;
-    --bs-primary-rgb: #12296c;
-  }
+    --background-color: #f0f4f8;
+    --bs-primary-rgb: #007bff;
+}
 
 body
 {
     font-family:'Popins', sans-serif;
     background-color: var(--background-color);
-    color: var(--bs-primary-rgb);
+    color: #333;
     font-weight: 300;
     font-size: 1.2rem;
     background-image: url(../image/noise-bg.png);
@@ -17,11 +17,14 @@ h1, h2, h3, h4, h5, h6
 {
     font-family:'unbounded', cursive;
     font-weight: 800;
+    color: #007bff;
 }
 
 .container-fluid-custom
 {
     max-width: 1600px;
+    padding-bottom: 2rem;
+    margin-bottom: 2rem;
 }
 
 /*
@@ -43,8 +46,8 @@ Button Styles
     --bs-btn-bg: var(--bs-primary-rgb);
     --bs-btn-border-color: var(--bs-primary-rgb);
     --bs-btn-hover-color: #fff;
-    --bs-btn-hover-bg: #0043a8;
-    --bs-btn-hover-border-color: #0043a8;
+    --bs-btn-hover-bg: #0056b3;
+    --bs-btn-hover-border-color: #0056b3;
     --bs-btn-focus-shadow-rgb: 49, 132, 253;
     --bs-btn-active-color: #fff;
     --bs-btn-active-bg: var(--bs-primary-rgb);
@@ -58,9 +61,9 @@ Button Styles
 .btn-outline-primary {
     --bs-btn-color: var(--bs-primary-rgb);
     --bs-btn-border-color: var(--bs-primary-rgb);
-    --bs-btn-hover-color: #0043a8;
-    --bs-btn-hover-bg: #0043a8;
-    --bs-btn-hover-border-color: #0d6efd;
+    --bs-btn-hover-color: #0056b3;
+    --bs-btn-hover-bg: #0056b3;
+    --bs-btn-hover-border-color: #0056b3;
     --bs-btn-focus-shadow-rgb: 13, 110, 253;
     --bs-btn-active-color: #fff;
     --bs-btn-active-bg: var(--bs-primary-rgb);
@@ -74,9 +77,9 @@ Button Styles
 
 .pagination
 {
---bs-pagination-color: var(--bs-primary-rgb);
---bs-pagination-active-bg: var(--bs-primary-rgb);
---bs-pagination-active-border-color: var(--bs-primary-rgb);
+    --bs-pagination-color: var(--bs-primary-rgb);
+    --bs-pagination-active-bg: var(--bs-primary-rgb);
+    --bs-pagination-active-border-color: var(--bs-primary-rgb);
 }
 
 /* Home */
@@ -85,29 +88,41 @@ Button Styles
     .home
     {
         background: 
-        url(../image/human-1.svg) left  no-repeat,
-        url(../image/human-2.svg) right  no-repeat,
+        url(../image/human-1.svg) left top 120px no-repeat,
+        url(../image/human-2.svg) right top 120px no-repeat,
         url(../image/noise-bg.png) left repeat,
         var(--background-color);
     }
 }
-.home-title::before
-{
-    content: url(../image/stars.svg);
+.home-title::before,
+.home-title::after {
+    content: '';
+    background: url(../image/stars.svg) no-repeat;
+    background-size: contain;
+    width: 100px; /* Adjust size as needed */
+    height: 100px; /* Adjust size as needed */
     position: absolute;
+    filter: invert(29%) sepia(100%) saturate(7483%) hue-rotate(180deg) brightness(95%) contrast(101%); /* Change to blue */
+}
+
+.home-title::before {
     left: -50px;
     top: -30px;
 }
-.home-title::after
-{
-    content: url(../image/stars.svg);
-    position: absolute;
+
+.home-title::after {
     right: -50px;
     bottom: -30px;
-
 }
 
 .logo {
     width: 50px;
     height: auto;
   }
+
+.footer-bg {
+    background-color: var(--background-color);
+    background-image: url(../image/noise-bg.png);
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
